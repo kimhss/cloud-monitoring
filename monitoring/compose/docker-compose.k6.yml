@@ -1,0 +1,24 @@
+services:
+  k6:
+    image: grafana/k6:latest
+    container_name: k6
+    profiles: [ "k6" ]
+    working_dir: /scripts
+    environment:
+      K6_OUT: experimental-prometheus-rw
+      K6_PROMETHEUS_RW_SERVER_URL: http://prometheus:9090/api/v1/write
+      K6_PROMETHEUS_RW_TREND_AS_NATIVE_HISTOGRAM: "true"
+    volumes:
+      - ../../../perf/k6/scripts:/scripts
+      - ../../../perf/results:/results
+    networks:
+      - perf
+      - app-network
+
+networks:
+  perf:
+    external: true
+    name: perf-network   # prometheus가 속한 네트워크
+  app-network:
+    external: true
+    name: app-network
