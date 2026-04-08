@@ -60,7 +60,6 @@ services:
 
 networks:
   perf:
-    external: true
     name: perf-network
   app-network:
     external: true
