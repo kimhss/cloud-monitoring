@@ -4,13 +4,13 @@ MONITORING := monitoring/compose/docker-compose.monitoring.yml
 .PHONY: monitor-up monitor-down monitor-logs
 
 monitor-up:
-	docker compose $(MONITORING) --env-file .env up -d --remove-orphans
+	docker compose -f $(MONITORING) --env-file .env up -d --remove-orphans
 
 monitor-down:
-	docker compose $(MONITORING) --env-file .env down
+	docker compose -f $(MONITORING) --env-file .env down
 
 monitor-logs:
-	docker compose $(MONITORING) --env-file .env logs -f
+	docker compose -f $(MONITORING) --env-file .env logs -f
 
 # ─── 편의 명령 ───────────────────────────────────────────────
 .PHONY: help
