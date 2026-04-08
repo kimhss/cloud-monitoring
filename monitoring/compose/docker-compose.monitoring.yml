@@ -13,7 +13,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ${PWD}/docker/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ../prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prom_data_cloud:/prometheus
     networks: [perf, app-network]
 
@@ -24,7 +24,7 @@ services:
     ports:
       - "3100:3100"
     volumes:
-      - ${PWD}/docker/monitoring/loki/loki-config.yml:/etc/loki/local-config.yaml:ro
+      - ../loki/loki-config.yml:/etc/loki/local-config.yaml:ro
       - loki_data_cloud:/tmp/loki
     networks: [perf, app-network]
 
@@ -33,7 +33,7 @@ services:
     container_name: promtail-cloud
     command: -config.file=/etc/promtail/config.yml
     volumes:
-      - ${PWD}/docker/monitoring/promtail/promtail-config.yml:/etc/promtail/config.yml:ro
+      - ../promtail/promtail-config.yml:/etc/promtail/config.yml:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
     depends_on:
       - loki
@@ -51,8 +51,8 @@ services:
       - "3000:3000"
     volumes:
       - grafana_data_cloud:/var/lib/grafana
-      - ${PWD}/docker/monitoring/grafana/provisioning-cloud:/etc/grafana/provisioning
-      - ${PWD}/docker/monitoring/grafana/dashboards:/etc/grafana/dashboards
+      - ../grafana/provisioning-cloud:/etc/grafana/provisioning
+      - ../grafana/dashboards:/etc/grafana/dashboards
     depends_on:
       - prometheus
       - loki
