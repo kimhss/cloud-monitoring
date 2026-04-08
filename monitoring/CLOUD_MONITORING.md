@@ -128,7 +128,7 @@ make monitor-cloud-down
 볼륨은 삭제되지 않는다. 데이터까지 초기화하려면:
 
 ```bash
-docker compose -f docker/monitoring/compose/docker-compose.monitoring.cloud.yml down -v
+docker compose -f docker/monitoring/compose/docker-compose.monitoring.yml down -v
 ```
 
 ## 로컬과의 차이점

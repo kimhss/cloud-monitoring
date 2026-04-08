@@ -6,11 +6,11 @@ server:
 
 common:
   instance_addr: 127.0.0.1
-  path_prefix: /loki
+  path_prefix: /tmp/loki
   storage:
     filesystem:
-      chunks_directory: /loki/chunks
-      rules_directory: /loki/rules
+      chunks_directory: /tmp/loki/chunks
+      rules_directory: /tmp/loki/rules
   replication_factor: 1
   ring:
     kvstore:
@@ -21,7 +21,7 @@ query_range:
     cache:
       embedded_cache:
         enabled: true
-        max_size_mb: 100
+        max_size_mb: 200
 
 schema_config:
   configs:
@@ -34,8 +34,14 @@ schema_config:
         period: 24h
 
 limits_config:
-  ingestion_rate_mb: 16
-  ingestion_burst_size_mb: 32
+  ingestion_rate_mb: 32
+  ingestion_burst_size_mb: 64
+  retention_period: 168h   # 7일
+
+compactor:
+  working_directory: /tmp/loki/compactor
+  retention_enabled: true
+  delete_request_store: filesystem
 
 ruler:
   alertmanager_url: http://localhost:9093
