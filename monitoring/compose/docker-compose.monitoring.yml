@@ -51,7 +51,7 @@ services:
       - "3000:3000"
     volumes:
       - grafana_data_cloud:/var/lib/grafana
-      - ${PWD}/docker/monitoring/grafana/provisioning-cloud:/etc/grafana/provisioning
+      - ${PWD}/docker/monitoring/grafana/provisioning:/etc/grafana/provisioning
       - ${PWD}/docker/monitoring/grafana/dashboards:/etc/grafana/dashboards
     depends_on:
       - prometheus
