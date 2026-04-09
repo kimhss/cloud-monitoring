@@ -13,4 +13,4 @@ scrape_configs:
 
   - job_name: "loki"
     static_configs:
-      - targets: ["loki-cloud:3100"]
+      - targets: ["loki:3100"]
