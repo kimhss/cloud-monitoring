@@ -1,4 +1,4 @@
-MONITORING := docker/monitoring/compose/docker-compose.monitoring.yml
+MONITORING := monitoring/compose/docker-compose.monitoring.yml
 
 # ─── 모니터링 스택 (클라우드) ────────────────────────────────
 .PHONY: monitor-cloud-up monitor-cloud-down monitor-cloud-logs
