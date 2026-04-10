@@ -44,7 +44,7 @@ services:
     image: prometheuscommunity/postgres-exporter:latest
     container_name: postgres-exporter-cloud
     environment:
-      DATA_SOURCE_NAME: "postgresql://psqladmin:Seulgi1234!@#@postgres-db:5432/team04-dev_db?sslmode=disable"
+      DATA_SOURCE_NAME: "postgresql://psqladmin:Seulgi1234!@%23@postgres-db:5432/team04-dev_db?sslmode=disable"
     ports:
       - "9187:9187"
     networks: [perf, app-network]
