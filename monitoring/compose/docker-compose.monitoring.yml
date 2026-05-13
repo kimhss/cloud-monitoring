@@ -15,7 +15,7 @@ services:
     volumes:
       - ../prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prom_data_cloud:/prometheus
-    networks: [perf, app-network]
+    networks: [perf, team01-prod-network]
 
   loki:
     image: grafana/loki:latest
@@ -27,7 +27,7 @@ services:
     volumes:
       - ../loki/loki-config.yml:/etc/loki/local-config.yaml:ro
       - loki_data_cloud:/tmp/loki
-    networks: [perf, app-network]
+    networks: [perf, team01-prod-network]
 
   promtail:
     image: grafana/promtail:latest
@@ -38,7 +38,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     depends_on:
       - loki
-    networks: [perf, app-network]
+    networks: [perf, team01-prod-network]
 
   postgres-exporter:
     image: prometheuscommunity/postgres-exporter:latest
@@ -47,7 +47,7 @@ services:
       DATA_SOURCE_NAME: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres-db:5432/${POSTGRES_DB}?sslmode=disable"
     ports:
       - "9187:9187"
-    networks: [perf, app-network]
+    networks: [perf, team01-prod-network]
     restart: unless-stopped
 
   grafana:
@@ -74,7 +74,7 @@ networks:
     name: perf-network
   app-network:
     external: true
-    name: app-network
+    name: team01-prod-network
 
 volumes:
   prom_data_cloud:
